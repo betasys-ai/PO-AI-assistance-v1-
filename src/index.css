@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* PDF.js styles */
+@import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+@import 'react-pdf/dist/esm/Page/TextLayer.css';
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 0 0% 100%;
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.prose {
+  max-width: none;
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-gray-300 dark:bg-gray-600;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400 dark:bg-gray-500;
+}
+
+/* PDF viewer custom styles */
+.react-pdf__Document {
+  @apply inline-block;
+}
+
+.react-pdf__Page {
+  @apply relative;
+}
+
+.react-pdf__Page__canvas {
+  @apply rounded border bg-white;
+}
+
+.react-pdf__Page__textContent {
+  @apply absolute left-0 top-0 h-full w-full select-text;
+}
+
+.react-pdf__Page__annotations.annotationLayer {
+  @apply absolute left-0 top-0 h-full w-full;
+}
+
+/* Annotation styles */
+.annotationLayer {
+  @apply z-10;
+}
+
+.annotationLayer section {
+  @apply absolute;
+}
+
+.annotationLayer .linkAnnotation > a,
+.annotationLayer .buttonWidgetAnnotation.pushButton > a {
+  @apply absolute left-0 top-0 h-full w-full;
+}
+
+.annotationLayer .linkAnnotation > a:hover,
+.annotationLayer .buttonWidgetAnnotation.pushButton > a:hover {
+  @apply bg-yellow-200/40 no-underline;
+}
+
+.annotationLayer .linkAnnotation > a {
+  @apply border-2 border-transparent;
+}
+
+.annotationLayer .linkAnnotation > a:hover {
+  @apply border-yellow-400;
+}
+
+/* Text layer styles */
+.textLayer {
+  @apply absolute left-0 top-0 z-0 h-full w-full overflow-hidden opacity-20;
+}
+
+.textLayer > span {
+  @apply absolute whitespace-pre;
+  color: transparent;
+  transform-origin: 0% 0%;
+}
+
+.textLayer .highlight {
+  @apply bg-yellow-200;
+  margin: -1px;
+  padding: 1px;
+}
+
+.textLayer .highlight.selected {
+  @apply bg-orange-400;
+}
